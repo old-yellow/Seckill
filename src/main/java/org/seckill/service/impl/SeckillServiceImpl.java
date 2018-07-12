@@ -1,4 +1,4 @@
-package service.impl;
+package org.seckill.service.impl;
 
 
 
@@ -10,8 +10,12 @@ import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.entity.Seckill;
 import org.seckill.entity.SuccessKilled;
+import org.seckill.service.SeckillService;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.support.StringMultipartFileEditor;
 
@@ -22,14 +26,18 @@ import enums.SeckillStateEnum;
 import exception.RepeatKillException;
 import exception.SeckillCloseException;
 import exception.SeckillException;
-import service.SeckillService;
 
+
+@Service
 public class SeckillServiceImpl implements SeckillService{
 	
 	private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
+	//×¢ÈëServiceÒÀÀµ
+	@Autowired
 	private SeckillDao seckillDao;
 	
+	@Autowired
 	private SuccessKilledDao successKilledDao;
 	
 	//md5ÑÎÖµ×Ö·û´®£¬ÓÃÓÚ»ìÏýmd5
@@ -69,6 +77,7 @@ public class SeckillServiceImpl implements SeckillService{
 		return md5;
 	}
 
+	@Transactional
 	public SeckillExcution excuteSeckill(long seckillId, long userPhone, String md5)
 			throws SeckillException, RepeatKillException, SeckillCloseException {
 		if(md5 == null || !md5.equals(getMd5(seckillId))) {

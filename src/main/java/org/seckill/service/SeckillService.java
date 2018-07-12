@@ -1,4 +1,4 @@
-package service;
+package org.seckill.service;
 
 import java.util.List;
 

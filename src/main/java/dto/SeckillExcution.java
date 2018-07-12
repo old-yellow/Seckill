@@ -7,6 +7,12 @@ import enums.SeckillStateEnum;
 //封装秒杀执行后结果
 public class SeckillExcution {
 
+	@Override
+	public String toString() {
+		return "SeckillExcution [seckillId=" + seckillId + ", state=" + state + ", stateInfo=" + stateInfo
+				+ ", successKilled=" + successKilled + "]";
+	}
+
 	public SeckillExcution(long seckillId, SeckillStateEnum stateEnum) {
 		super();
 		this.seckillId = seckillId;
