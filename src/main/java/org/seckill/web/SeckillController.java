@@ -1,4 +1,4 @@
-package web;
+package org.seckill.web;
 
 import java.util.Date;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.seckill.entity.Seckill;
 import org.seckill.service.SeckillService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ch.qos.logback.classic.Logger;
+
 import dto.Exposer;
 import dto.SeckillExcution;
 import dto.SeckillResult;
@@ -29,12 +30,12 @@ import exception.SeckillException;
 @RequestMapping("/seckill")//url:模块/资源/{id}/细分/seckill/list
 public class SeckillController {
 
-	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	private final Logger logger =  LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private SeckillService seckillService;
 	
-	@RequestMapping(name = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		//获取列表页
 		List<Seckill> list = seckillService.getSeckillList();
@@ -60,9 +61,9 @@ public class SeckillController {
 	//ajax Json
 	@RequestMapping(value = "/{seckillId}/exposer",
 			method = RequestMethod.POST,
-			produces = {"application/json;charset = UTF-8"})
+			produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
-	public SeckillResult<Exposer> exposer(Long seckillId) {
+	public SeckillResult<Exposer> exposer(@PathVariable Long seckillId) {
 		SeckillResult<Exposer> result;
 		try {
 			Exposer exposer = seckillService.exportSeckillUrl(seckillId);
@@ -77,7 +78,7 @@ public class SeckillController {
 	
 	@RequestMapping(value = "/{seckillId}/{md5}/excution",
 			method = RequestMethod.POST,
-					produces = {"application/json;charset = UTF-8"})
+					produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public SeckillResult<SeckillExcution> excute(@PathVariable("seckillId")Long seckillId,
 			@PathVariable("md5")String md5,
@@ -104,6 +105,7 @@ public class SeckillController {
 	}
 	
 	@RequestMapping(value = "/time/now", method = RequestMethod.GET)
+	@ResponseBody
 	public SeckillResult<Long> time() {
 		Date now = new Date();
 		return new SeckillResult<Long>(true,now.getTime());

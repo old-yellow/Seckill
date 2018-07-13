@@ -45,7 +45,7 @@ public class SeckillServiceImpl implements SeckillService{
 
 	public List<Seckill> getSeckillList() {
 		// TODO Auto-generated method stub
-		return seckillDao.queryAll(0, 4);
+		return seckillDao.queryAll(0, 5);
 	}
 
 	public Seckill getById(long seckillId) {
