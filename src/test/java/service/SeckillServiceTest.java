@@ -9,12 +9,12 @@ import org.junit.experimental.theories.Theories;
 import org.junit.runner.RunWith;
 import org.seckill.entity.Seckill;
 import org.seckill.service.SeckillService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ch.qos.logback.classic.Logger;
 import dto.Exposer;
 import dto.SeckillExcution;
 import exception.RepeatKillException;
@@ -27,7 +27,7 @@ import exception.SeckillCloseException;
 })
 public class SeckillServiceTest {
 	
-	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private SeckillService seckillService;

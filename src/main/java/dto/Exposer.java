@@ -4,6 +4,17 @@ public class Exposer {
 
 	private boolean exposed;
 	
+	private long seckillId;
+
+	//º”√‹
+	private String md5;
+	
+	private long now;
+	
+	private long start;
+	
+	private long end;
+	
 	public boolean isExposed() {
 		return exposed;
 	}
@@ -63,16 +74,7 @@ public class Exposer {
 		this.end = end;
 	}
 
-	private long seckillId;
 
-	//º”√‹
-	private String md5;
-	
-	private long now;
-	
-	private long start;
-	
-	private long end;
 	
 	public Exposer(boolean exposed, String md5, long seckillId) {
 		super();

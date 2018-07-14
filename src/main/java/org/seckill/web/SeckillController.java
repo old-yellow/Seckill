@@ -78,11 +78,11 @@ public class SeckillController {
 	
 	@RequestMapping(value = "/{seckillId}/{md5}/excution",
 			method = RequestMethod.POST,
-					produces = {"application/json;charset=UTF-8"})
+			produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public SeckillResult<SeckillExcution> excute(@PathVariable("seckillId")Long seckillId,
 			@PathVariable("md5")String md5,
-			@CookieValue(value = "killphone", required = false)Long phone) { 	
+			@CookieValue(value = "killPhone", required = false)Long phone) { 	
 		if(phone == null) {
 			return new SeckillResult<SeckillExcution>(false, "Î´×¢²á");
 		}
@@ -92,10 +92,10 @@ public class SeckillController {
 			return new SeckillResult<SeckillExcution>(true, excution);
 		} catch (RepeatKillException e) {
 			SeckillExcution seckillExcution = new SeckillExcution(seckillId, SeckillStateEnum.REPEAT_KILL);
-			return new SeckillResult<SeckillExcution>(false, seckillExcution);
+			return new SeckillResult<SeckillExcution>(true, seckillExcution);
 		}catch (SeckillCloseException e) {
 			SeckillExcution seckillExcution = new SeckillExcution(seckillId, SeckillStateEnum.END);
-			return new SeckillResult<SeckillExcution>(false, seckillExcution);
+			return new SeckillResult<SeckillExcution>(true, seckillExcution);
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 			SeckillExcution seckillExcution = new SeckillExcution(seckillId, SeckillStateEnum.INNER_ERROR);

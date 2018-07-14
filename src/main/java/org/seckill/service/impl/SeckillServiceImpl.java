@@ -11,6 +11,7 @@ import org.seckill.dao.SuccessKilledDao;
 import org.seckill.entity.Seckill;
 import org.seckill.entity.SuccessKilled;
 import org.seckill.service.SeckillService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.multipart.support.StringMultipartFileEditor;
 
-import ch.qos.logback.classic.Logger;
+
 import dto.Exposer;
 import dto.SeckillExcution;
 import enums.SeckillStateEnum;
@@ -31,7 +32,7 @@ import exception.SeckillException;
 @Service
 public class SeckillServiceImpl implements SeckillService{
 	
-	private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//×¢ÈëServiceÒÀÀµ
 	@Autowired
@@ -41,7 +42,7 @@ public class SeckillServiceImpl implements SeckillService{
 	private SuccessKilledDao successKilledDao;
 	
 	//md5ÑÎÖµ×Ö·û´®£¬ÓÃÓÚ»ìÏýmd5
-	private final String slat = "#@$@%a&*%^asdask6787(^&(basibiascn";
+	private final String slat = "#ask6787(^&(basibiascn";
 
 	public List<Seckill> getSeckillList() {
 		// TODO Auto-generated method stub
@@ -49,7 +50,6 @@ public class SeckillServiceImpl implements SeckillService{
 	}
 
 	public Seckill getById(long seckillId) {
-		// TODO Auto-generated method stub
 		return seckillDao.queryById(seckillId);
 	}
 

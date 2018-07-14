@@ -11,7 +11,7 @@ var seckill ={
 		},
 		
 		excution : function(seckillId, md5) {
-			return '/seckill/seckill/' + seckillId + '/' + md5+'/excution';
+			return '/seckill/seckill/' + seckillId + '/' + md5 + '/excution';
 		}
 	},
 	
@@ -27,7 +27,7 @@ var seckill ={
 					//获取秒杀地址
 					var md5 = exposer['md5'];
 					var killUrl = seckill.URL.excution(seckillId, md5);
-					console.log("killUrl:" + killUrl);
+					//console.log("killUrl:"+ killUrl);
 					//绑定一次点击事件
 					$('#killBtn').one('click',function(){
 						//禁用按钮
@@ -45,6 +45,7 @@ var seckill ={
 					});
 					node.show();
 				}else {
+					console.log("cuole");//TODO
 					//未开启秒杀
 					var now = exposer['now'];
 					var start = exposer['start'];
@@ -53,7 +54,7 @@ var seckill ={
 					seckill.countdown(seckillId, now, start, end);
 				}
 			}else {
-				console.log('result:' + result);//TODO
+				console.log("result:" + result);//TODO
 			}
 		});
 	},
@@ -131,7 +132,7 @@ var seckill ={
 					var nowTime = result['data'];
 					seckill.countdown(seckillId, nowTime, startTime, endTime);
 				}else {
-					console.log('result:'+ result);
+					console.log("result:"+ result);
 				}
 			});
 		}
